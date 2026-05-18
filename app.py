@@ -270,7 +270,7 @@ with left:
         number={"suffix": "%", "font": {"size": 44, "color": gauge_color}},
         title={"text": "6-Month Survival Probability", "font": {"size": 14, "color": "#000000"}},
         gauge={
-            "axis": {"range": [0, 100], "ticksuffix": "%", "tickfont": {"size": 11}},
+            "axis": {"range": [0, 100], "ticksuffix": "%", "tickfont": {"size": 11, "color": "black"}},
             "bar": {"color": gauge_color, "thickness": 0.25},
             "steps": [
                 {"range": [0, 25],  "color": "#fee2e2"},
@@ -428,14 +428,43 @@ with chart_col:
     fig_line.add_hrect(y0=25, y1=50, fillcolor="#fef9c3", opacity=0.3, line_width=0)
     fig_line.add_hrect(y0=50, y1=75, fillcolor="#dcfce7", opacity=0.3, line_width=0)
     fig_line.add_hrect(y0=75, y1=100,fillcolor="#bbf7d0", opacity=0.3, line_width=0)
+    # fig_line.update_layout(
+    #     height=280,
+    #     margin=dict(l=10, r=10, t=30, b=10),
+    #     paper_bgcolor="white",
+    #     plot_bgcolor="white",
+    #     yaxis=dict(range=[0, 100], gridcolor="#000000"),
+    #     xaxis=dict(gridcolor="#000000"),
+    #     # font_family="Inter, Segoe UI, sans-serif",
+    #     font=dict(
+    #     color="black",   # 👈 THIS fixes ALL remaining text
+    #     family="Inter, Segoe UI, sans-serif"
+    # )
+    # )
     fig_line.update_layout(
         height=280,
         margin=dict(l=10, r=10, t=30, b=10),
         paper_bgcolor="white",
         plot_bgcolor="white",
-        yaxis=dict(range=[0, 100], gridcolor="#f1f5f9"),
-        xaxis=dict(gridcolor="#f1f5f9"),
-        font_family="Inter, Segoe UI, sans-serif",
+        yaxis=dict(
+            range=[0, 100], 
+            gridcolor="#e2e8f0",        # Changed to a subtle gray so it doesn't clash with black text
+            showline=True,              # Ensures the axis line is visible
+            linecolor="black",          # Makes the Y-axis line black
+            tickcolor="black",          # Makes the tick marks black
+            tickfont=dict(color="black") # Makes the numbers (scale) black
+        ),
+        xaxis=dict(
+            gridcolor="#e2e8f0",        # Subtle gray grid lines
+            showline=True,              # Ensures the axis line is visible
+            linecolor="black",          # Makes the X-axis line black
+            tickcolor="black",          # Makes the tick marks black
+            tickfont=dict(color="black") # Makes the numbers/categories black
+        ),
+        font=dict(
+            color="black",              # Fixes axis titles and global text
+            family="Inter, Segoe UI, sans-serif"
+        )
     )
     st.plotly_chart(fig_line, use_container_width=True)
 
